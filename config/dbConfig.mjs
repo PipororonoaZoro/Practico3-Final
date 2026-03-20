@@ -4,7 +4,7 @@ export async function connectDB()
 {
     try {
             await mongoose.connect("mongodb+srv://grupo-14:grupo-14@cluster0.blryo.mongodb.net/NodeMod3Cohorte5");
-            console.group('Conexión exitosa a MongoDB');
+            console.log('Conexión exitosa a MongoDB');
         }
         catch (error)
         {
