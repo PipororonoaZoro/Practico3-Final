@@ -11,7 +11,7 @@ const superheroSchema = new mongoose.Schema(
     aliados: [String],
     enemigos: [String],
     creador: String,
-    createAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now }
 });
 const superHero = mongoose.model('SuperHero', superheroSchema, 'Grupo-14');
 export default superHero
