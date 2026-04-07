@@ -85,6 +85,11 @@ export async function crearSuperheroeController(req, res)
     }
     catch (error)
     {
+        if (error.name === 'ValidationError') {
+        // Captura todos los mensajes de validación de Mongoose
+        const mensajes = Object.values(error.errors).map(e => e.message);
+        return res.status(400).json({ errores: mensajes });
+        }
         res.status(500).send({ mensaje: 'Error al crear superhéroe', error: error.message });
     }
 }
@@ -105,6 +110,11 @@ export async function actualizarSuperheroeController(req, res)
     }
     catch (error)
     {
+        if (error.name === 'ValidationError') 
+        {
+        const mensajes = Object.values(error.errors).map(e => e.message);
+        return res.status(400).json({ errores: mensajes });
+        }
         res.status(500).send({ mensaje: 'Error al actualizar superhéroe', error: error.message });
     }
 }
