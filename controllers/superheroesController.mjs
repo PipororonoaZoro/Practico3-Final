@@ -81,7 +81,7 @@ export async function crearSuperheroeController(req, res)
     {
         const nuevoSuperheroe = await crearSuperheroe(req.body);
         const superheroeFormateado = renderizarSuperheroe(nuevoSuperheroe);
-        res.status(201).json(superheroesFormateado);
+        res.status(201).json(superheroeFormateado);
     }
     catch (error)
     {
