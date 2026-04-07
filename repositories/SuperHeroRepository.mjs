@@ -29,14 +29,17 @@ class SuperHeroRepository extends IRepository
 
     async crear(datos)
     {
-        return await SuperHero.create(datos);
+        const nuevoHeroe = new SuperHero(datos);
+        return await nuevoHeroe.save(); // dispara validaciones del schema
     }
 
-    async actualizar(id, datos)
-    // { new: true } devuelve el objeto ya modificado
+    async actualizar(id, datosActualizados) 
     {
-        return await SuperHero.findByIdAndUpdate(id, datos, { new: true });
-    }
+        return await SuperHero.findByIdAndUpdate(id, datosActualizados, {
+        new: true,
+        runValidators: true // 🔑 esto obliga a validar al actualizar
+  });
+}
 
     async borrarPorId(id)
     {
