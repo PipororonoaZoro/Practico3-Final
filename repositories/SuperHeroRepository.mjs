@@ -24,6 +24,30 @@ class SuperHeroRepository extends IRepository
     {
         return await SuperHero.find({ edad: { $gt: 30 } });
     }
+
+// --- Métodos nuevos gregados al preactico ---
+
+    async crear(datos)
+    {
+        return await SuperHero.create(datos);
+    }
+
+    async actualizar(id, datos)
+    // { new: true } devuelve el objeto ya modificado
+    {
+        return await SuperHero.findByIdAndUpdate(id, datos, { new: true });
+    }
+
+    async borrarPorId(id)
+    {
+        return await SuperHero.findByIdAndDelete(id);
+    }
+
+    async borrarPorNombre(nombre)
+    // Usamos el nomobre del campo del superheroe
+    {
+        return await SuperHero.findOneAndDelete({ nombreSuperHeroe: nombre });
+    }
 }
 
 export default new SuperHeroRepository();
