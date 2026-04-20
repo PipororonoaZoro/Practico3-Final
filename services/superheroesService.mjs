@@ -41,3 +41,8 @@ export async function borrarSuperheroePorNombre(nombre)
 {
     return await superHeroRepository.borrarPorNombre(nombre);
 }
+
+export async function eliminarSuperheroe(id)
+{
+    return await superHeroRepository.eliminar(id);
+}

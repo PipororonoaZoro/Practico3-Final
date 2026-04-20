@@ -26,9 +26,11 @@ export async function obtenerTodosLosSuperheroesController(req, res)
     try
     {
         const superheroes = await obtenerTodosLosSuperheroes();
+        res.render('dashboard', { superheroes });
 
         const superheroesFormateados = renderizarListaSuperheroes(superheroes);
         res.status(200).json(superheroesFormateados);
+        res.render('dashboard', { superheroes: superheroes });
     }
     catch (error)
     {
@@ -156,4 +158,64 @@ export async function borrarSuperheroePorNombreController(req, res)
         res.status(500).send({ mensaje: 'Error al borrar superhéroe por nombre', error: error.message });
     }
     
+}
+
+export async function agregarSuperheroeController(req, res) {
+  try {
+    // Transformar campos separados por coma en arrays
+    const datos = {
+      ...req.body,
+      poderes: req.body.poderes.split(",").map(p => p.trim()),
+      aliados: req.body.aliados ? req.body.aliados.split(",").map(a => a.trim()) : [],
+      enemigos: req.body.enemigos ? req.body.enemigos.split(",").map(e => e.trim()) : []
+    };
+
+    await crearSuperheroe(datos);
+    res.redirect('/api/heroes'); // vuelve al dashboard
+  } catch (error) {
+    res.status(400).send({ mensaje: 'Error al agregar superhéroe', error: error.message });
+  }
+}
+
+export async function obtenerSuperheroePorIdController(req, res) {
+    try 
+    {
+        const hero = await obtenerSuperheroePorId(req.params.id);
+        res.render('editSuperhero', { hero });
+    }
+    catch (error)
+    {
+        res.status(404).send({ mensaje: 'Superhéroe no encontrado', error: error.message })
+    }
+}
+
+export async function editarSuperheroeController(req, res) {
+    try
+    {
+        const datos = {
+            ...req.body,
+            poderes: req.body.poderes.split(",").map(p => p.trim()),
+            aliados: req.body.aliados ? req.body.aliados.split(",").map(a => a.trim()) : [],
+            enemigos: req.body.enemigos ? req.body.enemigos.split(",").map(e => e.trim()) : []
+        };
+
+        await actualizarSuperheroe(req.params.id, datos);
+        res.redirect('/api/heroes'); // vuelve al dashborard
+    }
+    catch (error)
+    {
+        res.status(400).send({ mensaje: 'Error al editar superhéroe', error: error.message });
+    }
+}
+
+export async function eliminarSuperheroeController(req, res) {
+    try
+    {
+        await eliminarSuperheroeController(req.params.id); // ama al service/repository
+        res.redirect('/api/heroes'); // vuelve al dashboard
+    }
+    catch (error)
+    {
+        res.status(500).send({ mensaje: 'Error al eliminar superhéroe', error: error.message });
+    }
 }
