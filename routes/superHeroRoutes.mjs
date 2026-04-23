@@ -21,7 +21,7 @@ router.get('/heroes/:id', obtenerSuperheroePorIdController);
 // Nuevas rutas
 
 router.get('/heroes/:id/editar', obtenerSuperheroePorIdController); // muestra el formulario
-router.post('/heroes/:id/editar', editarSuperheroeController); // procesa el edición
+router.post('/heroes/:id/editar', renderizarFormularioEditarController); // procesa el edición
 router.post('/heroes/agregar', agregarSuperheroeController);
 router.post('/heroes', crearSuperheroeController);
 router.put('/heroes/:id', actualizarSuperheroeController);

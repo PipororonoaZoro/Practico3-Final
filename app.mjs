@@ -10,6 +10,7 @@ import { connectDB } from './config/dbConfig.mjs';
 import superHeroRoutes from './routes/superHeroRoutes.mjs';
 import methodOverride from 'method-override';
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const app = express();
 const PORT = process.env.PORT || 3000;

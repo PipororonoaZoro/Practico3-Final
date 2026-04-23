@@ -177,7 +177,7 @@ export async function agregarSuperheroeController(req, res) {
   }
 }
 
-export async function obtenerSuperheroePorIdController(req, res) {
+export async function renderizarFormularioEditarController(req, res) {
     try 
     {
         const hero = await obtenerSuperheroePorId(req.params.id);

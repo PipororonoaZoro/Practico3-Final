@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Superhéroes</title>
+  <meta charset="UTF-8">
+  <title>Dashboard de Superhéroes</title>
 </head>
-<body>
-    <h1>Lista de Superhéroes</h1>
 
-    <table border="1" cellpadding="5">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Nombre Real</th>
-                <th>Edad</th>
-                <th>Planeta</th>
-                <th>Poderes</th>
-            </tr>
-        </thead>
-        <body>
-            <% superheroes.forEach(hero => { %>
-                <tr>
-                    <td><%= hero.nombre %></td>
-                    <td><%= hero.nombreReal %></td>
-                    <td><%= hero.edad %></td>
-                    <td><%= hero.planeta %></td>
-                    <td><%= hero.poderes.join(', ') %></td>
-                    <!-- Botón de editar -->
-                    <td><a href="/api/heroes/<%= hero._id%>/editar">Editar</a>
-                    <!-- Botón de eliminar -->
-                    <form action="/api/heroes/<%= hero._id %>?method=DELETE" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar este superhéroe?');"><button type="submit">Eliminar</button></form>
-                    </td>
-                </tr>
-                <% }) %>
-        </body>
-    </table>
+<link rel="stylesheet" href="/style.css">
+
+<body>
+  <h1>Lista de Superhéroes</h1>
+
+  <!-- Botón para ir al formulario de agregar -->
+  <a href="/api/heroes/agregar">Agregar nuevo héroe</a>
+  <br><br>
+
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Nombre Real</th>
+        <th>Edad</th>
+        <th>Planeta</th>
+        <th>Poderes</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% superheroes.forEach(hero => { %>
+        <tr>
+          <td><%= hero.nombreSuperHeroe %></td>
+          <td><%= hero.nombreReal %></td>
+          <td><%= hero.edad %></td>
+          <td><%= hero.planetaOrigen %></td>
+          <td><%= hero.poderes.join(", ") %></td>
+          <td>
+            <!-- Botón de editar -->
+            <a href="/api/heroes/<%= hero._id %>/editar">Editar</a>
+
+            <!-- Botón de eliminar -->
+            <form action="/api/heroes/<%= hero._id %>?_method=DELETE" method="POST"
+                  onsubmit="return confirm('¿Seguro que quieres eliminar este superhéroe?');">
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </body>
 </html>
