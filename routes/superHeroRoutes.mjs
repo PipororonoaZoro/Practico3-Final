@@ -15,20 +15,28 @@ import {
 } from '../controllers/superheroesController.mjs';
 const router = express.Router();
 
-router.get('/heroes', obtenerTodosLosSuperheroesController);
-router.get('/heroes/mayores-30', obtenerSuperheroesMayoresDe30Controller);
-router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
-router.get('/heroes/:id', obtenerSuperheroePorIdController);
+// ⚠️ IMPORTANTE: Las rutas específicas DEBEN ir antes que las rutas con parámetros (:id)
 
-// Nuevas rutas
-router.get('/heroes/:id/editar', renderizarFormularioEditarController); // muestra el formulario
-router.post('/heroes/:id/editar', editarSuperheroeController);      // procesa la edición
-router.get('/heroes/agregar', (req, res) => res.render('addSuperhero')); // muestra el form
-router.post('/heroes/agregar', agregarSuperheroeController);
+// Rutas estáticas y específicas primero
+router.get('/heroes/agregar', (req, res) => res.render('addSuperhero')); // muestra el formulario
+router.post('/heroes/agregar', agregarSuperheroeController); // procesa la creación desde formulario
+router.get('/heroes/mayores-30', obtenerSuperheroesMayoresDe30Controller); // obtiene mayores de 30
+router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController); // busca por atributo
 
-router.post('/heroes', crearSuperheroeController);
-router.put('/heroes/:id', actualizarSuperheroeController);
-router.delete('/heroes/:id', borrarSuperheroePorIdController);
-router.delete('/heroes/nombre/:nombre', borrarSuperheroePorNombreController);
+// Rutas con ID en la posición (editar debe ir antes que :id genérico)
+router.get('/heroes/:id/editar', renderizarFormularioEditarController); // muestra el formulario de edición
+router.post('/heroes/:id/editar', editarSuperheroeController); // procesa la edición
+
+// Rutas con parámetros genéricos al final
+router.get('/heroes', obtenerTodosLosSuperheroesController); // obtiene todos los héroes
+router.get('/heroes/:id', obtenerSuperheroePorIdController); // obtiene un héroe por ID
+
+// Rutas POST, PUT, DELETE
+router.post('/heroes', crearSuperheroeController); // crea un nuevo héroe
+router.put('/heroes/:id', actualizarSuperheroeController); // actualiza un héroe (API)
+
+// Rutas DELETE - específicas primero
+router.delete('/heroes/nombre/:nombre', borrarSuperheroePorNombreController); // elimina por nombre
+router.delete('/heroes/:id', borrarSuperheroePorIdController); // elimina por ID
 
 export default router;

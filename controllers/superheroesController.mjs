@@ -158,18 +158,27 @@ export async function borrarSuperheroePorNombreController(req, res)
 
 export async function agregarSuperheroeController(req, res) {
   try {
+    // Validar que existan los campos requeridos
+    if (!req.body.nombreSuperHeroe || !req.body.nombreReal || !req.body.edad || !req.body.poderes) {
+      return res.status(400).render('addSuperhero', { error: 'Por favor complete todos los campos requeridos' });
+    }
+
     // Transformar campos separados por coma en arrays
     const datos = {
       ...req.body,
-      poderes: req.body.poderes.split(",").map(p => p.trim()),
-      aliados: req.body.aliados ? req.body.aliados.split(",").map(a => a.trim()) : [],
-      enemigos: req.body.enemigos ? req.body.enemigos.split(",").map(e => e.trim()) : []
+      poderes: req.body.poderes.split(",").map(p => p.trim()).filter(p => p.length > 0),
+      aliados: req.body.aliados ? req.body.aliados.split(",").map(a => a.trim()).filter(a => a.length > 0) : [],
+      enemigos: req.body.enemigos ? req.body.enemigos.split(",").map(e => e.trim()).filter(e => e.length > 0) : []
     };
 
     await crearSuperheroe(datos);
     res.redirect('/api/heroes'); // vuelve al dashboard
   } catch (error) {
-    res.status(400).send({ mensaje: 'Error al agregar superhéroe', error: error.message });
+    if (error.name === 'ValidationError') {
+      const mensajes = Object.values(error.errors).map(e => e.message);
+      return res.status(400).render('addSuperhero', { error: mensajes.join(', ') });
+    }
+    res.status(400).render('addSuperhero', { error: error.message });
   }
 }
 
@@ -190,17 +199,25 @@ export async function editarSuperheroeController(req, res) {
     {
         const datos = {
             ...req.body,
-            poderes: req.body.poderes.split(",").map(p => p.trim()),
-            aliados: req.body.aliados ? req.body.aliados.split(",").map(a => a.trim()) : [],
-            enemigos: req.body.enemigos ? req.body.enemigos.split(",").map(e => e.trim()) : []
+            poderes: req.body.poderes.split(",").map(p => p.trim()).filter(p => p.length > 0),
+            aliados: req.body.aliados ? req.body.aliados.split(",").map(a => a.trim()).filter(a => a.length > 0) : [],
+            enemigos: req.body.enemigos ? req.body.enemigos.split(",").map(e => e.trim()).filter(e => e.length > 0) : []
         };
 
-        await actualizarSuperheroe(req.params.id, datos);
-        res.redirect('/api/heroes'); // vuelve al dashborard
+        const heroActualizado = await actualizarSuperheroe(req.params.id, datos);
+        if (!heroActualizado) {
+            return res.status(404).render('editSuperhero', { hero: {}, error: 'Superhéroe no encontrado' });
+        }
+        res.redirect('/api/heroes');
     }
     catch (error)
     {
-        res.status(400).send({ mensaje: 'Error al editar superhéroe', error: error.message });
+        if (error.name === 'ValidationError') {
+            const mensajes = Object.values(error.errors).map(e => e.message);
+            const hero = await obtenerSuperheroePorId(req.params.id);
+            return res.status(400).render('editSuperhero', { hero, error: mensajes.join(', ') });
+        }
+        res.status(400).render('editSuperhero', { hero: {}, error: error.message });
     }
 }
 

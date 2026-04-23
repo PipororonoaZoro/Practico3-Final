@@ -8,12 +8,21 @@
 <body>
     <h1>Editar Superhéroes</h1>
 
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div style="color: red; padding: 10px; background-color: #ffe6e6;">
+            <strong>Error:</strong> <%= error %>
+        </div>
+    <% } %>
+
     <form action="/api/heroes/<%= hero._id %>/editar" method="POST">
         <label>Nombre del superhéroe:</label>
         <input type="text" name="nombreSuperHeroe" value="<%= hero.nombreSuperHeroe %>" required minlength="3" maxlength="60"><br><br>
 
+        <label>Nombre Real:</label>
+        <input type="text" name="nombreReal" value="<%= hero.nombreReal %>" required minlength="3" maxlength="60"><br><br>
+
         <label>Edad:</label>
-        <input type="text" name="edad" value="<%= hero.edad %>" required min="0"><br><br>
+        <input type="number" name="edad" value="<%= hero.edad %>" required min="0"><br><br>
 
         <label>Planeta de Origen:</label>
         <input type="text" name="planetaOrigen" value="<%= hero.planetaOrigen %>"><br><br>
@@ -31,6 +40,7 @@
         <input type="text" name="enemigos" value="<%= hero.enemigos ? hero.enemigos.join(', ') : '' %>"><br><br>
 
         <button type="submit">Guardar Cambios</button>
+        <a href="/api/heroes"><button type="button">Cancelar</button></a>
     </form>
     
 </body>

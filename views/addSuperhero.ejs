@@ -8,15 +8,21 @@
 <body>
     <h1>Agregar Superhéroe</h1>
 
-    <form action="/api/heores/agregar" method="POST">
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div style="color: red; padding: 10px; background-color: #ffe6e6;">
+            <strong>Error:</strong> <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/api/heroes/agregar" method="POST">
         <label>Nombre del Superhéroe:</label>
-        <input type="text " name="nombreSuperHeroe" required minlength="3" maxlength="60"><br><br>
+        <input type="text" name="nombreSuperHeroe" required minlength="3" maxlength="60"><br><br>
 
         <label>Nombre Real:</label>
         <input type="text" name="nombreReal" required minlength="3" maxlength="60"><br><br>
 
         <label>Edad:</label>
-        <input type="text" name="Edad" required min="0"><br>><br>
+        <input type="number" name="edad" required min="0"><br><br>
 
         <label>Planeta Origen:</label>
         <input type="text" name="planetaOrigen"><br><br>
@@ -28,12 +34,13 @@
         <input type="text" name="poderes" required><br><br>
 
         <label>Aliados (separados por coma):</label>
-        <input type="text" neme="aliados"><br><br>
+        <input type="text" name="aliados"><br><br>
 
         <label>Enemigos (separados por coma):</label>
         <input type="text" name="enemigos"><br><br>
 
         <button type="submit">Agregar</button>
+        <a href="/api/heroes"><button type="button">Cancelar</button></a>
 
     </form>
     

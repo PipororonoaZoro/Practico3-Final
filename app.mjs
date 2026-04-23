@@ -42,5 +42,12 @@ app.use((req, res) => {
 
 // Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+  console.log('======================================');
+  console.log(`🚀 Servidor corriendo en: http://localhost:${PORT}`);
+  console.log('📌 Rutas disponibles:');
+  console.log(`   Dashboard: http://localhost:${PORT}/api/heroes`);
+  console.log(`   Agregar:   http://localhost:${PORT}/api/heroes/agregar`);
+  console.log(`   Editar:    http://localhost:${PORT}/api/heroes/:id/editar`);
+  console.log('======================================');
 });
+
