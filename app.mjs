@@ -9,8 +9,6 @@ import { fileURLToPath } from 'url';
 import { connectDB } from './config/dbConfig.mjs';
 import superHeroRoutes from './routes/superHeroRoutes.mjs';
 import methodOverride from 'method-override';
-app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, 'public')));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +19,11 @@ const __dirname = path.dirname(__filename);
 
 // Middleware para parsear JSON
 app.use(express.json());
+
+// Middleware para formularios y method-override
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Conexión a MongoDB
 connectDB();

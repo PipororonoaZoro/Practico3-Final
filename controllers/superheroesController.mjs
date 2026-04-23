@@ -27,10 +27,6 @@ export async function obtenerTodosLosSuperheroesController(req, res)
     {
         const superheroes = await obtenerTodosLosSuperheroes();
         res.render('dashboard', { superheroes });
-
-        const superheroesFormateados = renderizarListaSuperheroes(superheroes);
-        res.status(200).json(superheroesFormateados);
-        res.render('dashboard', { superheroes: superheroes });
     }
     catch (error)
     {
@@ -211,7 +207,7 @@ export async function editarSuperheroeController(req, res) {
 export async function eliminarSuperheroeController(req, res) {
     try
     {
-        await eliminarSuperheroeController(req.params.id); // ama al service/repository
+        await borrarSuperheroePorId(req.params.id); // llama al service
         res.redirect('/api/heroes'); // vuelve al dashboard
     }
     catch (error)
