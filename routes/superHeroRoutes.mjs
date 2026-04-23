@@ -19,13 +19,15 @@ router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoContro
 router.get('/heroes/:id', obtenerSuperheroePorIdController);
 
 // Nuevas rutas
-
 router.get('/heroes/:id/editar', obtenerSuperheroePorIdController); // muestra el formulario
-router.post('/heroes/:id/editar', renderizarFormularioEditarController); // procesa el edición
+router.post('/heroes/:id/editar', editarSuperheroeController);      // procesa la edición
+router.get('/heroes/agregar', (req, res) => res.render('addSuperhero')); // muestra el form
 router.post('/heroes/agregar', agregarSuperheroeController);
+
 router.post('/heroes', crearSuperheroeController);
 router.put('/heroes/:id', actualizarSuperheroeController);
 router.delete('/heroes/:id', borrarSuperheroePorIdController);
 router.delete('/heroes/nombre/:nombre', borrarSuperheroePorNombreController);
 router.delete('/heroes/:id', eliminarSuperheroeController);
+
 export default router;
