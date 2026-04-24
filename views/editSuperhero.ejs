@@ -2,51 +2,57 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Editar Superhéroe</title>
+  <title>Editar superhéroe</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <h1>Editar superhéroe</h1>
 
-  <form action="/api/heroes/<%= heroe._id %>?_method=PUT" method="POST">
-    <div>
-      <label for="nombre">Nombre del superhéroe:</label>
-      <input type="text" id="nombre" name="nombre" value="<%= heroe.nombre %>" required>
+  <form action="/api/heroes/<%= heroe._id %>?_method=PUT" method="POST" class="form-card">
+    <div class="form-group">
+      <label>Nombre del superhéroe:</label>
+      <input type="text" name="nombre" value="<%= heroe.nombre %>" required>
     </div>
 
-    <div>
-      <label for="nombreReal">Nombre real:</label>
-      <input type="text" id="nombreReal" name="nombreReal" value="<%= heroe.nombreReal %>" required>
+    <div class="form-group">
+      <label>Nombre real:</label>
+      <input type="text" name="nombreReal" value="<%= heroe.nombreReal %>" required>
     </div>
 
-    <div>
-      <label for="edad">Edad:</label>
-      <input type="number" id="edad" name="edad" value="<%= heroe.edad %>" required>
+    <div class="form-group">
+      <label>Edad:</label>
+      <input type="number" name="edad" value="<%= heroe.edad %>" required>
     </div>
 
-    <div>
-      <label for="planeta">Planeta de origen:</label>
-      <input type="text" id="planeta" name="planeta" value="<%= heroe.planeta %>">
+    <div class="form-group">
+      <label>Planeta de origen:</label>
+      <input type="text" name="planetaOrigen" value="<%= heroe.planetaOrigen %>" required>
     </div>
 
-    <div>
-      <label for="poderes">Poderes (separados por coma):</label>
-      <input type="text" id="poderes" name="poderes" value="<%= heroe.poderes.join(", ") %>" required>
+    <div class="form-group">
+      <label>Debilidad:</label>
+      <input type="text" name="debilidad" value="<%= heroe.debilidad %>">
     </div>
 
-    <div>
-      <label for="aliados">Aliados (separados por coma):</label>
-      <input type="text" id="aliados" name="aliados" value="<%= heroe.aliados.join(", ") %>">
+    <div class="form-group">
+      <label>Poderes (separados por coma):</label>
+      <input type="text" name="poderes" value="<%= heroe.poderes.join(", ") %>" required>
     </div>
 
-    <div>
-      <label for="enemigos">Enemigos (separados por coma):</label>
-      <input type="text" id="enemigos" name="enemigos" value="<%= heroe.enemigos.join(", ") %>">
+    <div class="form-group">
+      <label>Aliados (separados por coma):</label>
+      <input type="text" name="aliados" value="<%= heroe.aliados.join(", ") %>">
     </div>
 
-    <button type="submit" class="btn">Actualizar</button>
+    <div class="form-group">
+      <label>Enemigos (separados por coma):</label>
+      <input type="text" name="enemigos" value="<%= heroe.enemigos.join(", ") %>">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-success">Actualizar</button>
+      <a href="/api/heroes" class="btn btn-primary">Volver al dashboard</a>
+    </div>
   </form>
-
-  <a href="/api/heroes" class="btn">Volver al dashboard</a>
 </body>
 </html>

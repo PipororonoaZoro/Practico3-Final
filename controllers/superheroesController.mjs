@@ -10,7 +10,7 @@ import {
 export async function obtenerTodosLosSuperheroesController(req, res) {
   try {
     const superheroes = await obtenerTodosLosSuperheroes();
-    res.render("dashboard", { heroes: superheroes }); // 👈 pasamos heroes
+    res.render("dashboard", { heroes: superheroes });
   } catch (error) {
     res.status(500).send("Error al obtener los superhéroes");
   }
@@ -24,13 +24,14 @@ export function mostrarFormularioAgregarController(req, res) {
 // Agregar héroe
 export async function agregarSuperheroeController(req, res) {
   try {
-    const { nombre, nombreReal, edad, planeta, poderes, aliados, enemigos } = req.body;
+    const { nombre, nombreReal, edad, planetaOrigen, debilidad, poderes, aliados, enemigos } = req.body;
 
     const datos = {
       nombre,
       nombreReal,
       edad,
-      planeta,
+      planetaOrigen,
+      debilidad,
       poderes: poderes.split(",").map(p => p.trim()).filter(p => p.length > 0),
       aliados: aliados ? aliados.split(",").map(a => a.trim()).filter(a => a.length > 0) : [],
       enemigos: enemigos ? enemigos.split(",").map(e => e.trim()).filter(e => e.length > 0) : []

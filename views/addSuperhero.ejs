@@ -26,12 +26,17 @@
 
     <div class="form-group">
       <label>Planeta de origen:</label>
-      <input type="text" name="planeta" required>
+      <input type="text" name="planetaOrigen" required>
+    </div>
+
+    <div class="form-group">
+      <label>Debilidad:</label>
+      <input type="text" name="debilidad">
     </div>
 
     <div class="form-group">
       <label>Poderes (separados por coma):</label>
-      <input type="text" name="poderes">
+      <input type="text" name="poderes" required>
     </div>
 
     <div class="form-group">
@@ -44,8 +49,10 @@
       <input type="text" name="enemigos">
     </div>
 
-    <button type="submit" class="btn btn-success">Guardar</button>
-    <a href="/api/heroes" class="btn btn-primary">Volver al dashboard</a>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-success">Guardar</button>
+      <a href="/api/heroes" class="btn btn-primary">Volver al dashboard</a>
+    </div>
   </form>
 </body>
 </html>

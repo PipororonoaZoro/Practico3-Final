@@ -1,91 +1,87 @@
-/* ====== Estilos generales ====== */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #1e1e2f; /* oscuro */
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #1e1e2f;
+  color: #f8f8f2;
   margin: 0;
   padding: 20px;
-  color: #e0e0e0;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #f5f5f5;
+  color: #50fa7b;
 }
 
-a {
-  text-decoration: none;
-}
-
-/* ====== Tabla ====== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #2a2a3d;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-thead {
-  background-color: #44475a;
-  color: #f8f8f2;
-}
-
-thead th {
-  padding: 12px;
-  text-align: left;
-  font-weight: bold;
-}
-
-tbody td {
-  padding: 12px;
-  border-bottom: 1px solid #3c3c4d;
-}
-
-tbody tr:hover {
-  background-color: #38384a;
-}
-
-/* ====== Botones ====== */
-.btn {
+a.btn, button.btn {
   display: inline-block;
   padding: 8px 14px;
-  margin: 4px;
-  font-size: 14px;
+  border-radius: 6px;
+  text-decoration: none;
   font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
+  transition: background-color 0.3s ease;
 }
-
-.btn-primary {
-  background-color: #61dafb;
-  color: #1e1e2f;
-}
-.btn-primary:hover { background-color: #21a1f1; }
 
 .btn-success {
   background-color: #50fa7b;
   color: #1e1e2f;
 }
-.btn-success:hover { background-color: #3bd66a; }
+
+.btn-success:hover {
+  background-color: #3bd16a;
+}
+
+.btn-primary {
+  background-color: #6272a4;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #4a5680;
+}
 
 .btn-danger {
   background-color: #ff5555;
-  color: #1e1e2f;
+  color: #fff;
 }
-.btn-danger:hover { background-color: #d94444; }
 
-/* ====== Formulario ====== */
+.btn-danger:hover {
+  background-color: #cc4444;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #2a2a3d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: left;
+}
+
+table th {
+  background-color: #44475a;
+  color: #f8f8f2;
+}
+
+table tr:nth-child(even) {
+  background-color: #1e1e2f;
+}
+
+table tr:hover {
+  background-color: #383a59;
+}
+
 .form-card {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 30px auto;
   background-color: #2a2a3d;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
 .form-group {
@@ -101,9 +97,15 @@ tbody tr:hover {
 
 .form-group input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #44475a;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: #1e1e2f;
   color: #e0e0e0;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }

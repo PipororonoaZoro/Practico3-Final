@@ -16,7 +16,8 @@
         <th>Nombre</th>
         <th>Nombre Real</th>
         <th>Edad</th>
-        <th>Planeta</th>
+        <th>Planeta de origen</th>
+        <th>Debilidad</th>
         <th>Poderes</th>
         <th>Acciones</th>
       </tr>
@@ -27,12 +28,13 @@
           <td><%= hero.nombre %></td>
           <td><%= hero.nombreReal %></td>
           <td><%= hero.edad %></td>
-          <td><%= hero.planeta %></td>
+          <td><%= hero.planetaOrigen %></td>
+          <td><%= hero.debilidad %></td>
           <td><%= hero.poderes.join(", ") %></td>
           <td>
             <a href="/api/heroes/<%= hero._id %>/editar" class="btn btn-primary">Editar</a>
             <form action="/api/heroes/<%= hero._id %>?_method=DELETE" method="POST" style="display:inline;">
-              <button type="submit" class="btn btn-danger">Eliminar</button>
+              <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este héroe?')">Eliminar</button>
             </form>
           </td>
         </tr>
