@@ -1,56 +1,47 @@
-import SuperHero from '../models/SuperHero.mjs';
-import IRepository from './IRepository.mjs';
+import SuperHero from "../models/SuperHero.mjs";
 
-class SuperHeroRepository extends IRepository
-{
-    async obtenerPorId(id)
-    {
-        return await SuperHero.findById(id);
-    }
+class SuperHeroRepository {
+  async crear(datos) {
+    const nuevoHeroe = new SuperHero(datos);
+    return await nuevoHeroe.save();
+  }
 
-    async obtenerTodos()
-    {
-        return await SuperHero.find({});
-    }
+  async obtenerTodos() {
+    return await SuperHero.find();
+  }
 
-    // Resolución: Buscar por atributo
-    async buscarPorAtributo(atributo, valor)
-    {
-        return await SuperHero.find({ [atributo]: valor });
-    }
+  async obtenerPorId(id) {
+    return await SuperHero.findById(id);
+  }
 
-    // Resolución: obtener mayores de 30
-    async obtenerMayoresDe30()
-    {
-        return await SuperHero.find({ edad: { $gt: 30 } });
-    }
+  async buscarPorAtributo(atributo, valor) {
+    const filtro = {};
+    filtro[atributo] = valor;
+    return await SuperHero.find(filtro);
+  }
 
-// --- Métodos nuevos gregados al preactico ---
+  async obtenerMayoresDe30() {
+    return await SuperHero.find({ edad: { $gt: 30 } });
+  }
 
-    async crear(datos)
-    {
-        const nuevoHeroe = new SuperHero(datos);
-        return await nuevoHeroe.save(); // dispara validaciones del schema
-    }
+  async actualizar(id, datosActualizados) {
+    return await SuperHero.findByIdAndUpdate(id, datosActualizados, {
+      new: true,
+      runValidators: true
+    });
+  }
 
-    async actualizar(id, datosActualizados) 
-    {
-        return await SuperHero.findByIdAndUpdate(id, datosActualizados, {
-        new: true,
-        runValidators: true // 🔑 esto obliga a validar al actualizar
-  });
-}
+  async borrarPorId(id) {
+    return await SuperHero.findByIdAndDelete(id);
+  }
 
-    async borrarPorId(id)
-    {
-        return await SuperHero.findByIdAndDelete(id);
-    }
+  async borrarPorNombre(nombre) {
+    return await SuperHero.findOneAndDelete({ nombre });
+  }
 
-    async borrarPorNombre(nombre)
-    // Usamos el nomobre del campo del superheroe
-    {
-        return await SuperHero.findOneAndDelete({ nombreSuperHeroe: nombre });
-    }
+  async eliminar(id) {
+    return await SuperHero.findByIdAndDelete(id);
+  }
 }
 
 export default new SuperHeroRepository();
