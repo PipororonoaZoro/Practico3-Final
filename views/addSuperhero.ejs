@@ -1,58 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Agregar nuevo superhéroe</title>
-  <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nuevo Héroe</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Agregar nuevo superhéroe</h1>
 
-  <form action="/api/heroes" method="POST" class="form-card">
-    <div class="form-group">
-      <label>Nombre del superhéroe:</label>
-      <input type="text" name="nombre" required>
+    <div class="form-wrapper">
+        <div class="form-card">
+            <h1 class="titulo-seccion">Nuevo Superhéroe</h1>
+
+            <form action="/api/heroes" method="POST">
+                <div class="input-group">
+                    <label>Nombre del Superhéroe</label>
+                    <input type="text" name="nombreSuperHeroe" required>
+                </div>
+                <div class="input-group">
+                    <label>Nombre Real</label>
+                    <input type="text" name="nombreReal" required>
+                </div>
+                <div class="input-group">
+                    <label>Edad</label>
+                    <input type="number" name="edad" required>
+                </div>
+                <div class="input-group">
+                    <label>Planeta de Origen</label>
+                    <input type="text" name="planetaOrigen" required>
+                </div>
+                <div class="input-group">
+                    <label>Debilidad</label>
+                    <input type="text" name="debilidad">
+                </div>
+                <div class="input-group">
+                    <label>Poderes (Comas)</label>
+                    <input type="text" name="poderes">
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" class="btn btn-save">Guardar</button>
+                    <a href="/dashboard" class="btn btn-back">Volver al dashboard</a>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="form-group">
-      <label>Nombre real:</label>
-      <input type="text" name="nombreReal" required>
-    </div>
-
-    <div class="form-group">
-      <label>Edad:</label>
-      <input type="number" name="edad" required>
-    </div>
-
-    <div class="form-group">
-      <label>Planeta de origen:</label>
-      <input type="text" name="planetaOrigen" required>
-    </div>
-
-    <div class="form-group">
-      <label>Debilidad:</label>
-      <input type="text" name="debilidad">
-    </div>
-
-    <div class="form-group">
-      <label>Poderes (separados por coma):</label>
-      <input type="text" name="poderes" required>
-    </div>
-
-    <div class="form-group">
-      <label>Aliados (separados por coma):</label>
-      <input type="text" name="aliados">
-    </div>
-
-    <div class="form-group">
-      <label>Enemigos (separados por coma):</label>
-      <input type="text" name="enemigos">
-    </div>
-
-    <div class="form-actions">
-      <button type="submit" class="btn btn-success">Guardar</button>
-      <a href="/api/heroes" class="btn btn-primary">Volver al dashboard</a>
-    </div>
-  </form>
 </body>
 </html>

@@ -6,40 +6,44 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Lista de Superhéroes</h1>
+  <div class="container">
+    <h1 class="titulo-marvel">Lista de Superhéroes</h1>
 
-  <a href="/api/heroes/agregar" class="btn btn-success">Agregar nuevo héroe</a>
+    <a href="/api/heroes/agregar" class="btn btn-success">Agregar nuevo héroe</a>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Nombre Real</th>
-        <th>Edad</th>
-        <th>Planeta de origen</th>
-        <th>Debilidad</th>
-        <th>Poderes</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% heroes.forEach(hero => { %>
+    <table>
+      <thead>
         <tr>
-          <td><%= hero.nombre %></td>
-          <td><%= hero.nombreReal %></td>
-          <td><%= hero.edad %></td>
-          <td><%= hero.planetaOrigen %></td>
-          <td><%= hero.debilidad %></td>
-          <td><%= hero.poderes.join(", ") %></td>
-          <td>
-            <a href="/api/heroes/<%= hero._id %>/editar" class="btn btn-primary">Editar</a>
-            <form action="/api/heroes/<%= hero._id %>?_method=DELETE" method="POST" style="display:inline;">
-              <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este héroe?')">Eliminar</button>
-            </form>
-          </td>
+          <th>Nombre</th>
+          <th>Nombre Real</th>
+          <th>Edad</th>
+          <th>Planeta de origen</th>
+          <th>Debilidad</th>
+          <th>Poderes</th>
+          <th style="text-align: center;">Acciones</th>
         </tr>
-      <% }) %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% heroes.forEach(hero => { %>
+          <tr>
+            <td class="hero-name"><%= hero.nombre %></td>
+            <td><%= hero.nombreReal %></td>
+            <td><%= hero.edad %></td>
+            <td><%= hero.planetaOrigen %></td>
+            <td><%= hero.debilidad || 'Ninguna' %></td>
+            <td><%= hero.poderes.join(", ") %></td>
+            <td>
+              <div class="actions-group">
+                <a href="/api/heroes/<%= hero._id %>/editar" class="btn btn-primary">Editar</a>
+                <form action="/api/heroes/<%= hero._id %>?_method=DELETE" method="POST" style="display:inline;">
+                  <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que quieres eliminar este héroe?')">Eliminar</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
