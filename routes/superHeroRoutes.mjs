@@ -10,22 +10,18 @@ import {
 
 const router = express.Router();
 
-// Ruta: listar todos los héroes
+// Dashboard
 router.get("/heroes", obtenerTodosLosSuperheroesController);
 
-// Ruta: mostrar formulario de agregar
+// Formulario agregar
 router.get("/heroes/agregar", mostrarFormularioAgregarController);
+router.post("/heroes", agregarSuperheroeController);
 
-// Ruta: agregar héroe
-router.post("/heroes/agregar", agregarSuperheroeController);
-
-// Ruta: mostrar formulario de edición
+// Editar
 router.get("/heroes/:id/editar", editarSuperheroeController);
-
-// Ruta: actualizar héroe
 router.put("/heroes/:id", actualizarSuperheroeController);
 
-// Ruta: borrar héroe
+// Borrar
 router.delete("/heroes/:id", borrarSuperheroeController);
 
 export default router;

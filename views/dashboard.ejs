@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard de Superhéroes</title>
+  <title>Lista de Superhéroes</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <h1>Lista de Superhéroes</h1>
 
-  <a href="/api/heroes/agregar" class="btn">Agregar nuevo héroe</a>
+  <a href="/api/heroes/agregar" class="btn btn-success">Agregar nuevo héroe</a>
 
   <table>
     <thead>
@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <% superheroes.forEach(hero => { %>
+      <% heroes.forEach(hero => { %>
         <tr>
           <td><%= hero.nombre %></td>
           <td><%= hero.nombreReal %></td>
@@ -30,7 +30,7 @@
           <td><%= hero.planeta %></td>
           <td><%= hero.poderes.join(", ") %></td>
           <td>
-            <a href="/api/heroes/<%= hero._id %>/editar" class="btn">Editar</a>
+            <a href="/api/heroes/<%= hero._id %>/editar" class="btn btn-primary">Editar</a>
             <form action="/api/heroes/<%= hero._id %>?_method=DELETE" method="POST" style="display:inline;">
               <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>

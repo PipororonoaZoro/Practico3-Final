@@ -6,30 +6,24 @@ import {
   borrarSuperheroePorId
 } from "../services/superheroesService.mjs";
 
-// Controlador: listar todos los héroes
+// Listar todos
 export async function obtenerTodosLosSuperheroesController(req, res) {
   try {
     const superheroes = await obtenerTodosLosSuperheroes();
-    console.log("Superheroes desde MongoDB:", superheroes); // 👈 depuración
-    res.render("dashboard", { superheroes });
+    res.render("dashboard", { heroes: superheroes }); // 👈 pasamos heroes
   } catch (error) {
-    res.status(500).send({
-      mensaje: "Error al obtener los superhéroes",
-      error: error.message
-    });
+    res.status(500).send("Error al obtener los superhéroes");
   }
 }
 
-// Controlador: mostrar formulario de agregar
+// Mostrar formulario agregar
 export function mostrarFormularioAgregarController(req, res) {
   res.render("addSuperhero");
 }
 
-// Controlador: agregar héroe
+// Agregar héroe
 export async function agregarSuperheroeController(req, res) {
   try {
-    console.log("Datos recibidos del formulario:", req.body);
-
     const { nombre, nombreReal, edad, planeta, poderes, aliados, enemigos } = req.body;
 
     const datos = {
@@ -49,36 +43,35 @@ export async function agregarSuperheroeController(req, res) {
   }
 }
 
-// Controlador: editar héroe
+// Editar
 export async function editarSuperheroeController(req, res) {
   try {
     const id = req.params.id;
     const heroe = await obtenerSuperheroePorId(id);
     res.render("editSuperhero", { heroe });
   } catch (error) {
-    res.status(500).send({ mensaje: "Error al obtener el superhéroe", error: error.message });
+    res.status(500).send("Error al obtener el superhéroe");
   }
 }
 
-// Controlador: actualizar héroe
+// Actualizar
 export async function actualizarSuperheroeController(req, res) {
   try {
     const id = req.params.id;
-    const datosActualizados = req.body;
-    await actualizarSuperheroe(id, datosActualizados);
+    await actualizarSuperheroe(id, req.body);
     res.redirect("/api/heroes");
   } catch (error) {
-    res.status(500).send({ mensaje: "Error al actualizar el superhéroe", error: error.message });
+    res.status(500).send("Error al actualizar el superhéroe");
   }
 }
 
-// Controlador: borrar héroe
+// Borrar
 export async function borrarSuperheroeController(req, res) {
   try {
     const id = req.params.id;
     await borrarSuperheroePorId(id);
     res.redirect("/api/heroes");
   } catch (error) {
-    res.status(500).send({ mensaje: "Error al borrar el superhéroe", error: error.message });
+    res.status(500).send("Error al borrar el superhéroe");
   }
 }
