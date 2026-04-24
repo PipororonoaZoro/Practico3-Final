@@ -158,27 +158,28 @@ export async function borrarSuperheroePorNombreController(req, res)
 
 export async function agregarSuperheroeController(req, res) {
   try {
-    // Validar que existan los campos requeridos
-    if (!req.body.nombreSuperHeroe || !req.body.nombreReal || !req.body.edad || !req.body.poderes) {
-      return res.status(400).render('addSuperhero', { error: 'Por favor complete todos los campos requeridos' });
+    const { nombre, nombreReal, edad, planeta, poderes, aliados, enemigos } = req.body;
+
+    // Validar campos requeridos
+    if (!nombre || !nombreReal || !edad || !poderes) {
+      return res.status(400).render("addSuperhero", { error: "Por favor complete todos los campos requeridos" });
     }
 
     // Transformar campos separados por coma en arrays
     const datos = {
-      ...req.body,
-      poderes: req.body.poderes.split(",").map(p => p.trim()).filter(p => p.length > 0),
-      aliados: req.body.aliados ? req.body.aliados.split(",").map(a => a.trim()).filter(a => a.length > 0) : [],
-      enemigos: req.body.enemigos ? req.body.enemigos.split(",").map(e => e.trim()).filter(e => e.length > 0) : []
+      nombre,
+      nombreReal,
+      edad,
+      planeta,
+      poderes: poderes.split(",").map(p => p.trim()).filter(p => p.length > 0),
+      aliados: aliados ? aliados.split(",").map(a => a.trim()).filter(a => a.length > 0) : [],
+      enemigos: enemigos ? enemigos.split(",").map(e => e.trim()).filter(e => e.length > 0) : []
     };
 
-    await crearSuperheroe(datos);
-    res.redirect('/api/heroes'); // vuelve al dashboard
+    await crearSuperheroe(datos);   // 👈 guarda en MongoDB
+    res.redirect("/api/heroes");    // 👈 vuelve al dashboard
   } catch (error) {
-    if (error.name === 'ValidationError') {
-      const mensajes = Object.values(error.errors).map(e => e.message);
-      return res.status(400).render('addSuperhero', { error: mensajes.join(', ') });
-    }
-    res.status(400).render('addSuperhero', { error: error.message });
+    res.status(500).render("addSuperhero", { error: error.message });
   }
 }
 
