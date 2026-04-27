@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Nuevo Héroe</title>
+    <title>Panel de Superhéroes</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
     <div class="form-wrapper">
         <div class="form-card">
-            <h1 class="titulo-seccion">Nuevo Superhéroe</h1>
+            <!-- Título vistoso -->
+            <h1 class="titulo-seccion">⚡ Nuevo Superhéroe</h1>
+            <p style="text-align:center; margin-bottom:25px; color:#bbb; font-size:1rem;">
+                Completa la información para registrar un héroe en el sistema
+            </p>
 
+            <!-- Formulario -->
             <form action="/api/heroes" method="POST">
                 <div class="input-group">
                     <label>Nombre del Superhéroe</label>
-                    <input type="text" name="nombreSuperHeroe" required>
+                    <input type="text" name="nombre" required>
                 </div>
                 <div class="input-group">
                     <label>Nombre Real</label>
@@ -34,17 +38,25 @@
                     <input type="text" name="debilidad">
                 </div>
                 <div class="input-group">
-                    <label>Poderes (Comas)</label>
+                    <label>Poderes (separados por coma)</label>
                     <input type="text" name="poderes">
                 </div>
+                <div class="input-group">
+                    <label>Aliados (separados por coma)</label>
+                    <input type="text" name="aliados">
+                </div>
+                <div class="input-group">
+                    <label>Enemigos (separados por coma)</label>
+                    <input type="text" name="enemigos">
+                </div>
 
-                <div class="button-row">
-                    <button type="submit" class="btn btn-save">Guardar</button>
-                    <a href="/dashboard" class="btn btn-back">Volver al dashboard</a>
+                <!-- Bloque de acciones -->
+                <div class="button-row" style="display:flex; justify-content:center; gap:20px; margin-top:30px;">
+                    <button type="submit" class="btn btn-success">💾 Guardar héroe</button>
+                    <a href="/api/heroes" class="btn btn-primary">↩️ Volver al dashboard</a>
                 </div>
             </form>
         </div>
     </div>
-
 </body>
 </html>

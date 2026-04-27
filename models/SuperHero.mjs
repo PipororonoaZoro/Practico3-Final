@@ -20,7 +20,8 @@ const superheroSchema = new mongoose.Schema({
     required: [true, "La edad es obligatoria"],
     min: [0, "La edad no puede ser negativa"]
   },
-  planetaOrigen: { type: String, default: "Desconocido" },
+  planetaOrigen: { type: String, default: "" },
+  
   debilidad: {
     type: String,
     trim: true,
