@@ -35,6 +35,10 @@ app.set('views', path.join(__dirname, 'views'));
 // Configuración de rutas
 app.use('/api', superHeroRoutes);
 
+app.get('/', (req, res) => {
+    res.redirect('/api/heroes');
+});
+
 // Manejo de errores para rutas no encontradas
 app.use((req, res) => {
   res.status(404).send({ mensaje: "Ruta no encontrada" });
